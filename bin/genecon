@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+require 'yaml'
+require 'erb'
+require 'optparse'
+
+options = {}
+
+if ARGV.size == 0
+  puts "usage: genecon -t FILE(erb) -c CONFIG(YAML)"
+  exit
+end
+
+op = OptionParser.new do |opts|
+  opts.on('-t', '--template template(markdown)') do |file|
+    options[:template] = file
+  end
+  opts.on('-c', '--config config(yaml)') do |conf|
+    options[:conf] = conf
+  end
+end
+
+op.parse!
+
+t = IO.read(options[:template])
+c = open(options[:conf])
+@config = YAML.load(c)
+
+erb = ERB.new(t, nil, '-')
+print erb.result
+
+c.close
