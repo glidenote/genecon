@@ -43,8 +43,11 @@ url: http://www.google.co.jp
 email: foo@foovar.com
 ```
 
+### Command
+
 ``` shell
-genecon -f FILE(erb) -c CONFIG(yaml)
+genecon -t FILE -c CONFIG
+genecon --template FILE --config CONFIG
 ```
 
 ## Contributing
